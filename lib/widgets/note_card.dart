@@ -8,7 +8,13 @@ import '../screens/note_editor_screen.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
-  const NoteCard({super.key, required this.note});
+  final List<String> allCategories;
+
+  const NoteCard({
+    super.key,
+    required this.note,
+    required this.allCategories,
+  });
 
   void playAudio(String path) async {
     final player = FlutterSoundPlayer();
@@ -35,7 +41,10 @@ class NoteCard extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => NoteEditorScreen(note: note),
+                    builder: (_) => NoteEditorScreen(
+                      note: note,
+                      allCategories: allCategories,
+                    ),
                   ),
                 );
               },
@@ -84,7 +93,12 @@ class NoteCard extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => NoteEditorScreen(note: note)),
+            MaterialPageRoute(
+              builder: (_) => NoteEditorScreen(
+                note: note,
+                allCategories: allCategories,
+              ),
+            ),
           );
         },
         title: Text(
@@ -102,7 +116,12 @@ class NoteCard extends StatelessWidget {
             if (value == 'edit') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => NoteEditorScreen(note: note)),
+                MaterialPageRoute(
+                  builder: (_) => NoteEditorScreen(
+                    note: note,
+                    allCategories: allCategories,
+                  ),
+                ),
               );
             } else if (value == 'delete') {
               context.read<NoteProvider>().deleteNote(note.id);

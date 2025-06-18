@@ -11,8 +11,14 @@ import '../providers/note_provider.dart';
 class NoteEditorScreen extends StatefulWidget {
   final Note? note;
   final String? initialCategory;
+  final List<String> allCategories;
 
-  const NoteEditorScreen({super.key, this.note, this.initialCategory});
+  const NoteEditorScreen({
+    super.key,
+    this.note,
+    this.initialCategory,
+    required this.allCategories,
+  });
 
   @override
   State<NoteEditorScreen> createState() => _NoteEditorScreenState();
@@ -57,7 +63,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
 
   Future<void> _startRecording() async {
     final dir = await getTemporaryDirectory();
-    final path = '${dir.path}/${const Uuid().v4()}.aac';
+    final path = '\${dir.path}/\${const Uuid().v4()}.aac';
     await _recorder!.startRecorder(toFile: path);
     setState(() {
       _isRecording = true;
@@ -95,6 +101,8 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final allCategories = {...widget.allCategories, _category};
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.note != null ? "Notu Düzenle" : "Yeni Not"),
@@ -123,9 +131,12 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
               value: _category,
-              items: ['Genel', 'Özel', 'Okul', 'İş']
-                  .map((cat) => DropdownMenuItem(value: cat, child: Text(cat)))
-                  .toList(),
+              items: allCategories.map((cat) {
+                return DropdownMenuItem(
+                  value: cat,
+                  child: Text(cat),
+                );
+              }).toList(),
               onChanged: (val) {
                 setState(() {
                   _category = val!;

@@ -12,7 +12,13 @@ import 'package:audioplayers/audioplayers.dart';
 
 class CategoryNotesScreen extends StatelessWidget {
   final String category;
-  const CategoryNotesScreen({super.key, required this.category});
+  final List<String> allCategories;
+
+  const CategoryNotesScreen({
+    super.key,
+    required this.category,
+    required this.allCategories,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,10 @@ class CategoryNotesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           if (categoryNotes.isNotEmpty)
-            ...categoryNotes.map((note) => NoteCard(note: note)),
+            ...categoryNotes.map((note) => NoteCard(
+                  note: note,
+                  allCategories: allCategories,
+                )),
           if (categoryAudioNotes.isNotEmpty)
             ...categoryAudioNotes
                 .map((audioNote) => AudioNoteCard(audioNote: audioNote)),
@@ -132,7 +141,7 @@ class _AudioNoteCardState extends State<AudioNoteCard> {
       margin: const EdgeInsets.only(bottom: 16),
       child: ListTile(
         leading: const Icon(Icons.mic),
-        title: Text('Sesli Not - ${widget.audioNote.category}'),
+        title: Text('Sesli Not - \${widget.audioNote.category}'),
         subtitle: Text(dateFormatted),
         trailing: IconButton(
           icon: Icon(isPlaying ? Icons.stop : Icons.play_arrow),

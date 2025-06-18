@@ -68,12 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      print("Kategoriye tıklandı: $category");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              CategoryNotesScreen(category: category),
+                          builder: (_) => CategoryNotesScreen(
+                            category: category,
+                            allCategories: categories,
+                          ),
                         ),
                       );
                     },
