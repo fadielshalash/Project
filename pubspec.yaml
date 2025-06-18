@@ -1,0 +1,40 @@
+name: memomate_defter_notu
+description: Dijital not defteri uygulaması
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: 0.20.2
+  provider: ^6.1.2
+  shared_preferences: ^2.2.2
+  audioplayers: ^5.2.1
+  table_calendar: ^3.0.8
+  google_fonts: ^6.2.1
+  flutter_sound: ^9.2.13
+  uuid: ^4.2.1
+  record: ^4.4.4
+  path_provider: ^2.0.14
+  permission_handler: ^11.0.0
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icon/memomate_icon.png
+
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/memomate_icon.png"
+  adaptive_icon_background: "#5A0060"
+  adaptive_icon_foreground: "assets/icon/memomate_icon.png"
